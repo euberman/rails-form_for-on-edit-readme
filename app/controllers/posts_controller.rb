@@ -24,8 +24,9 @@ class PostsController < ApplicationController
 	end
 
 	def update
-	  @post = Post.find(params[:id])
-	  @post.update(title: params[:title], description: params[:description])
+		@post = Post.find(params[:id])
+		@post.update(params.require(:post).permit(:title, :description))
+	  # @post.update(title: params[:title], description: params[:description]) # for form_tag form
 	  redirect_to post_path(@post)
 	end
 end
